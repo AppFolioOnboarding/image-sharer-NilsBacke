@@ -22,4 +22,10 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_equal assigns(:image).id, image.id
     image.destroy!
   end
+
+  def test_assigns_images_in_index
+    get :image_path
+    assert_not_nil assigns(:images)
+    assert_empty assigns(:images)
+  end
 end
