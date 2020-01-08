@@ -1,5 +1,5 @@
 <h1>All Images</h1>
 <%= link_to 'Add new image', new_image_path %><br>
 <% @images.each do |image| %>
-  <%= image_tag image.url %><br>
+  <%= image_tag image.url, class: "image-container" %><br>
 <% end %>
