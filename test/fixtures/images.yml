@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  url: "https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg"
+
+two:
+  url: "https://www.medicalnewstoday.com/content/images/articles/322/322868/golden-retriever-puppy.jpg"
