@@ -26,3 +26,8 @@ node_modules
 /public/packs-test
 /node_modules
 .idea/
+
+# Ignore local file history (Local History VSCode extension)
+/.history
+
+/.vscode
