@@ -1,7 +1,11 @@
 require 'test_helper'
 
 class ImagesControllerTest < ActionDispatch::IntegrationTest
-  def test_assigns_image_in_new
+  setup do
+    create_images
+  end
+
+  def test_new__nil_image
     image = Image.new
     get new_image_path
     assert_response :ok
@@ -9,13 +13,13 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_nil image.url
   end
 
-  def test_assigns_image_in_create
+  def test_create__valid_image
     image = Image.new(url: 'https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg')
     post images_path, params: { image: { url: 'https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg' } }
     assert_equal assigns(:image).url, image.url
   end
 
-  def test_assigns_image_in_show
+  def test_show__valid_image
     image = Image.create(url: 'https://i.ytimg.com/vi/MPV2METPeJU/maxresdefault.jpg')
     get image_path(image.id)
     assert_response :ok
@@ -23,7 +27,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     image.destroy!
   end
 
-  def test_assigns_images_in_index
+  def test_index__empty
     Image.destroy_all
     get images_path
     assert_response :ok
@@ -31,9 +35,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_empty assigns(:images)
   end
 
-  def test_assigns_nonempty_images_in_index
-    Image.destroy_all
-    create_images
+  def test_index__nonempty
     get images_path
     assert_response :ok
     assert_not_nil assigns(:images)
@@ -42,9 +44,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_equal Image.all.length, assigns(:images).length
   end
 
-  def test_images_are_sorted
-    Image.destroy_all
-    create_images
+  def test_index__sorted_eh
     get images_path
     assert_response :ok
 
