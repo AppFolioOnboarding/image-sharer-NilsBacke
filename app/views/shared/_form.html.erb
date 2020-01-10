@@ -1,4 +1,17 @@
 <%= simple_form_for @image do |f| %>
-  <%= f.input :url %>
-  <%= f.button :submit %>
+  <div class="d-inline-flex flex-column m-3">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Url</span>
+      </div>
+      <%= f.input :url, label: false %>
+    </div>
+    <div class="input-group">
+      <div class="input-group-prepend mb-3">
+        <span class="input-group-text" id="basic-addon1">Tags</span>
+      </div>
+      <%= f.input :tag_list, label: false, placeholder: 'dog, husky, purebread', class: "form-control p-1"  %>
+    </div>
+    <%= f.button :submit, class: "btn btn-primary" %>
+  </div>
 <% end %>
