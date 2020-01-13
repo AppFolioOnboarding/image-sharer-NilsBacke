@@ -4,6 +4,8 @@ class ImagesController < ApplicationController
   end
 
   def index
+    @tags = ActsAsTaggableOn::Tag.all
+    # @tag = @tags[0]
     @images = Image.order(created_at: :desc)
   end
 
