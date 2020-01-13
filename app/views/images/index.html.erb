@@ -1,5 +1,18 @@
 <h1>All Images</h1>
 <%= link_to 'Add new image', new_image_path %><br>
-<% @images.each do |image| %>
-  <%= image_tag image.url, class: "image-container" %><br>
-<% end %>
+<div class="images__wrapper">
+  <% @images.each do |image| %>
+    <div class="card">
+      <%= image_tag image.url, class: "card-img-top image__container" %>
+      <div class="card-body">
+        <% if image.tag_list.empty?%>
+          <h5>No tags</h5>
+        <% else %>
+          <h5 class="card-title">
+            <%= image.tag_list %>
+          </h5>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

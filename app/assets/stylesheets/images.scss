@@ -2,9 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.image-container {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.images__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image__container {
   max-width: 400px;
+}
+
+.image-detail__container {
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
