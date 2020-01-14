@@ -5,8 +5,10 @@ class ImagesController < ApplicationController
 
   def index
     @tags = ActsAsTaggableOn::Tag.all
-    # @tag = @tags[0]
+    @tag = selected_tag_params || 'None'
+
     @images = Image.order(created_at: :desc)
+    @images = @images.tagged_with(@tag) unless @tag == 'None'
   end
 
   def create
@@ -27,5 +29,11 @@ class ImagesController < ApplicationController
 
   def image_params
     params.require(:image).permit(:url, :tag_list)
+  end
+
+  def selected_tag_params
+    params.require(:selected_tag).require(:tag_id)
+  rescue ActionController::ParameterMissing
+    nil
   end
 end
