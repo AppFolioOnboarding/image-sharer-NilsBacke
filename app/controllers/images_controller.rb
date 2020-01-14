@@ -5,7 +5,7 @@ class ImagesController < ApplicationController
 
   def index
     @tags = ActsAsTaggableOn::Tag.all
-    @tag = selected_tag_params || 'None'
+    @tag = selected_tag_params
 
     @images = Image.order(created_at: :desc)
     @images = @images.tagged_with(@tag) unless @tag == 'None'
@@ -32,8 +32,7 @@ class ImagesController < ApplicationController
   end
 
   def selected_tag_params
-    params.require(:selected_tag).require(:tag_name)
-  rescue ActionController::ParameterMissing
-    nil
+    strongp = params.permit(selected_tag: [:tag_name])
+    strongp[:selected_tag] ? strongp[:selected_tag][:tag_name] : 'None'
   end
 end
