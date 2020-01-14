@@ -32,7 +32,7 @@ class ImagesController < ApplicationController
   end
 
   def selected_tag_params
-    params.require(:selected_tag).require(:tag_id)
+    params.require(:selected_tag).require(:tag_name)
   rescue ActionController::ParameterMissing
     nil
   end
