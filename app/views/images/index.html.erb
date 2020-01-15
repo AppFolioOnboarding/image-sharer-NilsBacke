@@ -1,7 +1,11 @@
 <h1>All Images</h1>
 <%= link_to 'Add new image', new_image_path %><br>
 <h5>
-  Showing images with tag: <%= @tag %>
+  <% if !@tag.nil? %>
+    Showing images with tag: <%= @tag %>
+  <% else %>
+    Showing all images
+  <% end %>
 </h5>
 <%= simple_form_for :selected_tag, url: images_path, method: "GET" do |f| %>
   <%= f.input :tag_name, label: 'Filter by tag', collection: ['None'].concat(@tags.map(&:name)), selected: @tag %>

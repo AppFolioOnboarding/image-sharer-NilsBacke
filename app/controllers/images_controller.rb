@@ -5,10 +5,11 @@ class ImagesController < ApplicationController
 
   def index
     @tags = ActsAsTaggableOn::Tag.all
-    @tag = selected_tag_params
+    tag_text = selected_tag_params.dig(:selected_tag, :tag_name)
+    @tag = tag_text == 'None' ? nil : tag_text
 
     @images = Image.order(created_at: :desc)
-    @images = @images.tagged_with(@tag) unless @tag == 'None'
+    @images = @images.tagged_with(@tag) unless @tag.nil?
   end
 
   def create
@@ -32,7 +33,6 @@ class ImagesController < ApplicationController
   end
 
   def selected_tag_params
-    strongp = params.permit(selected_tag: [:tag_name])
-    strongp[:selected_tag] ? strongp[:selected_tag][:tag_name] : 'None'
+    params.permit(selected_tag: [:tag_name])
   end
 end

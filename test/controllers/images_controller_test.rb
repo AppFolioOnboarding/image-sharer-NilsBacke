@@ -87,7 +87,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     create_images
     get images_path, params: { selected_tag: { tag_name: 'None' } }
     assert_response :ok
-    assert_equal assigns(:tag), 'None'
+    assert_equal assigns(:tag), nil
     assert_equal assigns(:images).length, 4
   end
 
