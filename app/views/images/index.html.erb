@@ -1,17 +1,28 @@
 <h1>All Images</h1>
 <%= link_to 'Add new image', new_image_path %><br>
+<h5>
+  <% if !@tag.nil? %>
+    Showing images with tag: <%= @tag %>
+  <% else %>
+    Showing all images
+  <% end %>
+</h5>
+<%= simple_form_for :selected_tag, url: images_path, method: "GET" do |f| %>
+  <%= f.input :tag_name, label: 'Filter by tag', collection: ['None'].concat(@tags.map(&:name)), selected: @tag %>
+  <%= f.submit "Filter", class: "btn btn-primary" %>
+<% end %>
 <div class="images__wrapper">
   <% @images.each do |image| %>
     <div class="card">
       <%= image_tag image.url, class: "card-img-top image__container" %>
       <div class="card-body">
-        <% if image.tag_list.empty?%>
-          <h5>No tags</h5>
-        <% else %>
-          <h5 class="card-title">
-            <%= image.tag_list %>
-          </h5>
-        <% end %>
+        <h5 class="card-title">
+          <% if image.tag_list.empty?%>
+            No tags
+          <% else %>
+            Tags: <%= image.tag_list %>
+          <% end %>
+        </h5>
       </div>
     </div>
   <% end %>
